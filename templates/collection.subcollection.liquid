@@ -1,0 +1,15 @@
+{% comment %} <!-- collection.subcollection.liquid -->
+<div id="product-grid-section">
+  {% if collections[selectedCollection].collections[selectedSubcollection].products.size == 0 %}
+    <p>No products found.</p>
+  {% else %}
+    {% for product in collections[selectedCollection].collections[selectedSubcollection].products %}
+      <div class="product">
+        <h2>{{ product.title }}</h2>
+        <p>{{ product.description }}</p>
+
+      </div>
+    {% endfor %}
+  {% endif %}
+</div>
+ {% endcomment %}
