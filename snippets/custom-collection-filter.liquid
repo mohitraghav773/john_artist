@@ -1,0 +1,33 @@
+<!-- custom-collection-filterForm.liquid -->
+<form id="custom-filter-form">
+  <select id="collection-filter">
+     <option value="all">All Categories</option>
+  {% for link in linklists['collection'].links %}
+    <option value="{{ link.title }}">{{ link.title }}</option>
+  {% endfor %}
+  </select>
+  <select id="subcollection-filter">
+    <option value="">Select Subcollection</option>
+  </select>
+
+  <input type="submit" value="Filter">
+</form>
+<!-- Script to update sub collection Dropdown -->
+<script>
+   $('#collection-filter').on('change', function () {
+    var selectedCategory = this.value;
+    var subcategoryDropdown = document.getElementById("subcollection-filter");
+
+    // Clear previous subcategory options
+    subcategoryDropdown.innerHTML = '<option value="all">All Subcategories</option>';
+
+    // Populate subcategory options based on the selected category
+    {% for link in linklists['collection'].links %}
+      if ("{{ link.title }}" === selectedCategory) {
+        {% for child in link.links %}
+          subcategoryDropdown.innerHTML += '<option value="{{ child.title }}">{{ child.title }}</option>';
+        {% endfor %}
+      }
+    {% endfor %}
+  });
+</script>
